@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    localStorage.removeItem('teacherId');
+    localStorage.removeItem('password');
     $("#login").click(function (e) {
         e.preventDefault();
         var teacherId = $("#inputId").val();

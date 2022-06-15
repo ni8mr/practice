@@ -4,6 +4,7 @@ $(document).ready(function (){
     if (!teacherId || !password) {
         window.location.href = 'index.html'
     }
+    $("#teacher-id-to-show").empty().append(teacherId)
     $("#logout").click(function (e) {
         e.preventDefault();
         window.location.href = 'index.html'

@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
+                        <div class="small">লগইন করেছেন:</div>
                         <span id="teacher-id-to-show"></span>
                     </div>
                 </nav>
@@ -110,20 +110,161 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Potuakhali High School</h1>
+                        <h1 class="mt-4">পটুয়াখালী সরকারী প্রাথমিক বিদ্যালয়</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Student evaluation form</li>
+                            <li class="breadcrumb-item active">ধারাবাহিক মুল্যায়ন ফর্ম</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Subjects
+                                বিষয়সমূহ
                             </div>
                             <div class="card-body">
-                                <ul>
-                                    <li><a href="#">Science</a></li>
-                                    <li><a href="#">Math</a></li>
-                                </ul>
+                                <div id="subject-list">
+                                    <ul>
+                                        <li><a id="science" href="#">বিজ্ঞান</a></li>
+                                        <li><a id="math" href="#">গণিত</a></li>
+                                    </ul>
+                                </div>
+                                <div id="chapter-list" style="display: none;">
+                                    <form>
+                                        <div class="row">
+                                            <label class="col-md-2" for="chapters">অধ্যায়</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control" name="chapters" id="chapters">
+                                                    <option disabled selected>অধ্যায় বাছাই করুন</option>
+                                                    <option value="chap01">অধ্যায় ১</option>
+                                                    <option value="chap02">অধ্যায় ২</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="chapter-selection-error" style="display: none;">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-10">
+                                                <span class="text-danger">আগে অধ্যায় বাছাই করুন!</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-md-6">
+                                                <button type="button" id="back-from-chapter" class="btn btn-sm btn-secondary float-start">পিছে ফিরে যান</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="get-lessons" class="btn btn-sm btn-primary float-end">পাঠের তালিকা</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="lesson-list" style="display: none;">
+                                    <form>
+                                        <div class="row">
+                                            <label class="col-md-2" for="lessons">পাঠ</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control" name="lessons" id="lessons">
+                                                    <option disabled selected>একটি পাঠ বাছাই করুন</option>
+                                                    <option value="chap01">পাঠ ১</option>
+                                                    <option value="chap02">পাঠ ২</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="lesson-selection-error" style="display: none;">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-10">
+                                                <span class="text-danger">পাঠ বাছাই করুন!</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-md-6">
+                                                <button type="button" id="back-from-lesson" class="btn btn-sm btn-secondary float-start">পিছে ফিরে যান</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="start-evaluation" class="btn btn-sm btn-warning float-end">পরবর্তী ধাপ</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="checklist" style="display: none;">
+                                    <form>
+                                        <div class="row">
+                                            <label class="col-md-2" for="student-name">শিক্ষার্থীর নাম&nbsp;<span class="text-danger">*</span></label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" id="student-name" name="student-name"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <label class="col-md-2" for="student-id">শিক্ষার্থীর আইডি&nbsp;<span class="text-danger">*</span></label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" id="student-id" name="student-id"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>নির্দেশক</th>
+                                                    <th>হ্যাঁ</th>
+                                                    <th>না</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>বিভিন্ন জিনিসের নাম বলতে পেরেছে</td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>যা দেখেছে তা শনাক্ত করতে পেরেছে</td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                    <td>><input class="form-check-input" type="checkbox"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>যা দেখেছে তা বলতে পেরেছে</td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>শ্রেণি কার্যক্রমে (প্রকৃতি পর্যবেক্ষণ) স্বতঃস্ফূর্ত অংশগ্রহণ করেছে</td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>নতুন কিছু জানার জন্য প্রশ্ন করেছে</td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>অন্যের দেখা বিষয়গুলোর নাম নিজের তালিকায় যুক্ত করেছে</td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>যা দেখেছে তা-ই বলেছে</td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>অন্যের দ্বারা প্রভাবিত না হয়ে নিজের মতামত ব্যক্ত করেছে</td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                    <td><input class="form-check-input" type="checkbox"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row" id="checklist-selection-error" style="display: none;">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-10">
+                                                <span class="text-danger">প্রয়জনীয় তথ্য দিন!</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-md-6">
+                                                <button type="button" id="back-from-checklist" class="btn btn-sm btn-secondary float-start">ফিরে যান</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="save" class="btn btn-sm btn-success float-end">সংরক্ষণ করুন</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

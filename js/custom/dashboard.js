@@ -6,7 +6,7 @@ $(document).ready(function (){
     }
     $("#teacher-id-to-show").empty().append(teacherId);
 
-    $("#science").click(function (e) {
+    $(".subject").click(function (e) {
         e.preventDefault()
         $("#chapter-list").show();
         $("#subject-list").hide();
@@ -30,13 +30,13 @@ $(document).ready(function (){
            var optionsForLessons
            $("#chapter-selection-error").hide();
            if (chapter === 'chap01') {
-               optionsForLessons = '<option disabled selected>Select a lesson</option>' +
-                   '<option value="less01">Lesson 1</option>' +
-                   '<option value="less02">Lesson 2</option>'
+               optionsForLessons = '<option disabled selected>পাঠ বাছাই করুন</option>' +
+                   '<option value="less01">পাঠ ১</option>' +
+                   '<option value="less02">পাঠ ২</option>'
            } else if (chapter === 'chap02') {
-               optionsForLessons = '<option disabled selected>Select a lesson</option>' +
-                   '<option value="less03">Lesson 3</option>' +
-                   '<option value="less04">Lesson 4</option>'
+               optionsForLessons = '<option disabled selected>পাঠ বাছাই করুন</option>' +
+                   '<option value="less03">পাঠ ৩</option>' +
+                   '<option value="less04">পাঠ ৪</option>'
            }
            $("#lessons").empty().append(optionsForLessons);
            $("#chapter-list").hide();
@@ -66,6 +66,24 @@ $(document).ready(function (){
             $("#checklist").show();
         } else {
             $("#lesson-selection-error").show();
+        }
+    });
+
+    $("#back-from-checklist").click(function (e) {
+        e.preventDefault();
+        $("#lesson-list").show();
+        $("#checklist").hide();
+    });
+
+    $(".form-check-input").change(function(e) {
+        e.preventDefault();
+        var id = $(this).attr('id')
+        var idIncrement = id.split("-")[1]
+        var value = $(this).is(":checked")
+        if (id.split("-")[2] === 'yes' && value) {
+            $("#" + "indic-" + idIncrement + "-no").prop('checked', false)
+        } else if (id.split("-")[2] === 'no' && value) {
+            $("#" + "indic-" + idIncrement + "-yes").prop('checked', false)
         }
     });
 
